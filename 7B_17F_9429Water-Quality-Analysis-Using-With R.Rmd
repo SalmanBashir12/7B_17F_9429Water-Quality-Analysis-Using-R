@@ -14,17 +14,108 @@ knitr::opts_chunk$set(echo = TRUE)
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Libraries portion
 
-```{r cars}
-summary(cars)
+```{r}
+install.packages('ggplot2')
+library(ggplot2)
+install.packages("readr")
+library(readr)
+install.packages('scales')
+install.packages('gtrendsR')
+install.packages('ggplot2')
+library(scales)
+library(gtrendsR)
+library(ggplot2)
+
 ```
+Loading CSV file taken from kaggle
+
+```{r}
+data <- read.csv("C:\\Users\\Hp\\Documents\\R\\7B_17F_9429Water-Quality-Analysis-Using-R\\water_potability.csv")
+head(data,200)
+
+```
+Excluding unused Columns with NA
+Dropped all the null values
+
+```{r}
+data <- na.omit(data)
+head(data)
+
+```
+
 
 ## Including Plots
 
-You can also embed plots, for example:
+You can also embed plots, 
+Plotting Safe and unsafe water on the basis of Potability If it is 1 then safe for 0 it is unsafe
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+Count <- count.fields("C:\\Users\\Hp\\Documents\\R\\7B_17F_9429Water-Quality-Analysis-Using-R\\water_potability.csv")
+Count
+p <- ggplot(data, aes(x=Potability)) + geom_histogram(bins=5)+ labs(title = "Distribution of safe And Unsafe water")+ 
+
+print(p)
+
+
 ```
+Quality of water Affected by pH
+```{r}
+plot <- ggplot(data, aes(x=ph)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:pH")
+
+print(plot)
+
+```
+```{r}
+plot <- ggplot(data, aes(x=Hardness)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:Hardness")
+
+print(plot)
+
+```
+```{r}
+plot <- ggplot(data, aes(x=Solids)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:Solids")
+
+print(plot)
+
+```
+```{r}
+plot <- ggplot(data, aes(x=Chloramines)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:Chloramines")
+
+print(plot)
+
+```
+```{r}
+plot <- ggplot(data, aes(x=Sulfate)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:Sulfate")
+
+print(plot)
+
+```
+```{r}
+
+plot <- ggplot(data, aes(x=Conductivity)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:Conductivity")
+
+print(plot)
+
+```
+```{r}
+plot <- ggplot(data, aes(x=Organic_carbon)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:Organic_carbon")
+
+print(plot)
+
+```
+```{r}
+plot <- ggplot(data, aes(x=Trihalomethanes)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:Trihalomethanes")
+
+print(plot)
+
+```
+```{r}
+plot <- ggplot(data, aes(x=Turbidity)) + geom_histogram(bins=5)+ labs(title = "Factor affecting water Quality:Turbidity")
+
+print(plot)
+
+```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
